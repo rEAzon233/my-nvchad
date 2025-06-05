@@ -1,7 +1,7 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        event = { "BufReadPre", "BufNewFile" },
+        event = { "BufReadPost", "BufNewFile" },
         config = function()
             require("configs.treesitter")
         end,
@@ -64,12 +64,14 @@ return {
             require("leap").add_default_mappings(true)
         end,
     },
-    -- {
-    --     "rshkarin/mason-nvim-lint",
-    --     event = "VeryLazy",
-    --     dependencies = { "nvim-lint" },
-    --     config = function()
-    --         require("configs.mason-lint")
-    --     end,
-    -- },
+    {
+        "olexsmir/gopher.nvim",
+        ft = "go",
+        build = function()
+            vim.cmd.GoInstallDeps()
+        end,
+        config = function()
+            require("configs.gopher")
+        end,
+    },
 }
